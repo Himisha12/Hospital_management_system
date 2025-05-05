@@ -20,12 +20,20 @@ function AddPatient() {
     useState("");
 
     const validateInputs = () => {
-      const nameRegex = /^[A-Za-z]+$/;
+      // const nameRegex = /^[A-Za-z]+$/;
       const usernameRegex = /^[a-zA-Z0-9]{4,}$/;
-      const emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
-      const passwordRegex = /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{6,}$/;
+      // const emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
+      // const passwordRegex = /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{6,}$/;
+      // const phoneRegex = /^[6-9]\d{9}$/;
+      const nameRegex = /^[A-Za-z]{3,}$/;
+      // const usernameRegex = /^[a-zA-Z0-9]{4,20}$/; 
+      // const emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,63}$/;
+      const emailRegex = /^[-!#-'*+\/-9=?A-Z^-~]+(\.[-!#-'*+\/-9=?A-Z^-~]+)*|"([\]!#-[^-~ \t]|(\\[\t -~]))+"@([-!#-'*+\/-9=?A-Z^-~]+(\.[-!#-'*+\/-9=?A-Z^-~]+)*|\[[\t -Z^-~]*])$/;  // const passwordRegex = /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{6,}$/;
+
+      const passwordRegex = /^.{6}$/; // Password must be at least 6 characters long and contain letters and numbers
+      const departmentRegex = /^[a-zA-Z\s]{3,}$/; 
       const phoneRegex = /^[6-9]\d{9}$/;
-    
+
       if (!nameRegex.test(firstName)) {
         toast.error("Invalid First Name. Only alphabets allowed.");
         return false;

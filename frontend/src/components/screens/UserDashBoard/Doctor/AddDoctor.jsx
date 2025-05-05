@@ -14,15 +14,21 @@ function Adddoctor() {
   const [password, setPassword] = useState("");
   const [phone, setPhone] = useState("");
   const [department, setDepartment] = useState("");
+  const [verificationSent, setVerificationSent] = useState(false);
+  const [verificationCode, setVerificationCode] = useState("");
+  const [userEnteredCode, setUserEnteredCode] = useState("");
   const [passwordValidationMessage, setPasswordValidationMessage] =
     useState("");
 
     const validateInputs = () => {
-      const nameRegex = /^[A-Za-z]+$/;
-      const usernameRegex = /^[a-zA-Z0-9]{4,}$/;
-      const emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
-      const passwordRegex = /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{6,}$/;
-      const phoneRegex = /^[0-9]{10}$/;
+      const nameRegex = /^[A-Za-z]{3,}$/;
+      const usernameRegex = /^[a-zA-Z0-9]{4,20}$/; 
+      // const emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,63}$/;
+      const emailRegex = /^[-!#-'*+\/-9=?A-Z^-~]+(\.[-!#-'*+\/-9=?A-Z^-~]+)*|"([\]!#-[^-~ \t]|(\\[\t -~]))+"@([-!#-'*+\/-9=?A-Z^-~]+(\.[-!#-'*+\/-9=?A-Z^-~]+)*|\[[\t -Z^-~]*])$/;  // const passwordRegex = /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{6,}$/;
+
+      const passwordRegex = /^.{6}$/; // Password must be at least 6 characters long and contain letters and numbers
+      const departmentRegex = /^[a-zA-Z\s]{3,}$/; 
+      const phoneRegex = /^[6-9]\d{9}$/;
     
       if (!nameRegex.test(firstName)) {
         toast.error("Invalid First Name. Only alphabets allowed.");
@@ -45,12 +51,16 @@ function Adddoctor() {
       }
     
       if (!passwordRegex.test(password)) {
-        toast.error("Password must be at least 6 characters with letters and numbers.");
+        toast.error("Password must be at least 6 characters.");
         return false;
       }
     
       if (!phoneRegex.test(phone)) {
-        toast.error("Phone number must be 10 digits.");
+        toast.error("Invalid Phone Number.");
+        return false;
+      }
+      if (!departmentRegex.test(department)) {
+        toast.error("Department: 3+ letters only, no numbers/special characters");
         return false;
       }
     

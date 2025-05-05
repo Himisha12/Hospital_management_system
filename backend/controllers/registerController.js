@@ -8,10 +8,15 @@ const nodemailer = require("nodemailer");
 //User Validation
 const isUserValid = (newUser) => {
   const errorList = [];
-  const nameRegex = /^[a-zA-Z]+(([',. -][a-zA-Z ])?[a-zA-Z]*)*$/;
-  const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-  const passwordRegex = /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$/;
+  // const nameRegex = /^[a-zA-Z]+(([',. -][a-zA-Z ])?[a-zA-Z]*)*$/;
+  const nameRegex = /^[A-Za-z]{3,}$/;
+      // const usernameRegex = /^[a-zA-Z0-9]{4,20}$/; 
+      // const emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,63}$/;
+  const emailRegex = /^[-!#-'*+\/-9=?A-Z^-~]+(\.[-!#-'*+\/-9=?A-Z^-~]+)*|"([\]!#-[^-~ \t]|(\\[\t -~]))+"@([-!#-'*+\/-9=?A-Z^-~]+(\.[-!#-'*+\/-9=?A-Z^-~]+)*|\[[\t -Z^-~]*])$/;  // const passwordRegex = /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{6,}$/;
 
+  const passwordRegex = /^.{6}$/; // Password must be at least 6 characters long and contain letters and numbers
+      const departmentRegex = /^[a-zA-Z\s]{3,}$/; 
+      const phoneRegex = /^[6-9]\d{9}$/;
   if (!newUser.firstName) {
     errorList.push("Please enter first name");
   } else if (!nameRegex.test(newUser.firstName)) {

@@ -18,12 +18,44 @@ function Register() {
   const [password, setPassword] = useState("");
 
   const [userType, setUserType] = useState("");
+  const [emailError, setEmailError] = useState("");
+
   const [passwordMatchDisplay, setPasswordMatchDisplay] = useState("none");
   const [passwordValidationMessage, setPasswordValidationMessage] =
     useState("");
 
   const handleSubmit = async (event) => {
     event.preventDefault();
+    const nameRegex = /^[A-Za-z]+$/;
+    const usernameRegex = /^[a-zA-Z0-9]{4,}$/;
+    const emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
+    const passwordRegex = /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{6,}$/;
+  
+    if (!nameRegex.test(firstName)) {
+            toast.error("Invalid First Name. Only alphabets allowed.");
+            return false;
+          }
+        
+          if (!nameRegex.test(lastName)) {
+            toast.error("Invalid Last Name. Only alphabets allowed.");
+            return false;
+          }
+          
+    if (!emailRegex.test(email)) {
+      setEmailError("Invalid email format");
+      return;
+    } else {
+      setEmailError(""); // clear error if valid
+    }
+    if (!usernameRegex.test(username)) {
+      toast.error("Username must be 4-16 characters (letters, numbers, underscore)");
+      return;
+    }
+  
+    if (!passwordRegex.test(password)) {
+      toast.error("Password must have at least 6 characters, 1 number, 1 uppercase");
+      return;
+    }
 
     let user = {
       firstName,
@@ -127,12 +159,16 @@ function Register() {
               name="email"
               placeholder="name@example.com"
               value={email}
-              onChange={(event) => setEmail(event.target.value)}
+              onChange={(event) => {
+              setEmail(event.target.value);
+              setEmailError(""); // clear error on typing
+            }}
               required
               className="form-control"
             />
             <label htmlFor="email">Email</label>
           </div>
+          {emailError && <div className="text-danger mx-2">{emailError}</div>}
           <div className="col-12 col-sm-12 col-lg-6  form-floating mx-2 ">
             <input
               type="text"
