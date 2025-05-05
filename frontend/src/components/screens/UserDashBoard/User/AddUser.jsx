@@ -17,10 +17,6 @@ function AddUser() {
   const [errorList, setErrorList] = useState([]);
 
   const validateInputs = () => {
-    // const nameRegex = /^[A-Za-z]+$/;
-    // const usernameRegex = /^[a-zA-Z0-9]{4,}$/;
-    // const emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
-    // const passwordRegex = /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{6,}$/;
     const nameRegex = /^[A-Za-z]{3,}$/;
       const usernameRegex = /^[a-zA-Z0-9]{4,20}$/; 
       // const emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,63}$/;
